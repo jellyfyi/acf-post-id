@@ -180,26 +180,9 @@ class acf_field_post_id extends acf_field {
 
 	function format_value_for_api( $value, $post_id, $field )
 	{
-		if( !$value )
+		if( !is_string($value) )
 		{
-			return false;
-		}
-
-		if( $value == 'null' )
-		{
-			return false;
-		}
-
-		if( is_array($value) )
-		{
-			foreach( $value as $k => $v )
-			{
-				$value[ $k ] = get_the_id($v);
-			}
-		}
-		else
-		{
-			$value = get_the_id($value);
+			return $value;
 		}
 
 		return $value;
